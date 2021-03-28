@@ -1,0 +1,20 @@
+server:
+  port: 3296
+
+auth:
+  app:
+    jwtSecret: S3cr3t
+    jwtExpirationMs: 86400000
+
+spring:
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: default
