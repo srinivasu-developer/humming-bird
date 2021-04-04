@@ -1,5 +1,6 @@
 package com.techolution.entities;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,9 +21,11 @@ public class Department {
     private String location;
 
     @OneToMany(mappedBy = "departmentName")
+    @ApiModelProperty(hidden = true)
     private List<Course> courses;
 
     @OneToMany(mappedBy = "departmentName")
+    @ApiModelProperty(hidden = true)
     private List<Instructor> instructors;
 
     public Department(String name, String location) {

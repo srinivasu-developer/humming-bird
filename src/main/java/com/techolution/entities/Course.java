@@ -1,9 +1,11 @@
 package com.techolution.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -16,10 +18,11 @@ public class Course implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(hidden = true)
     private Long id;
 
     @Column
-    @NonNull
+    @NotBlank(message = "Department name must not be empty")
     private String departmentName;
 
     @Column
@@ -29,10 +32,12 @@ public class Course implements Serializable {
     private Long duration;
 
     @Column
+    @NotBlank(message = "Course name must not be empty")
     private String name;
 
     @OneToMany(mappedBy = "course")
     @JsonIgnore
+    @ApiModelProperty(hidden = true)
     private Set<CourseStudent> courseStudents;
 
     public Course() {
