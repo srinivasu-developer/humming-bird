@@ -6,6 +6,7 @@ import com.techolution.entities.Student;
 import com.techolution.exception.StudentNotFoundException;
 import com.techolution.repositories.StudentRepository;
 import com.techolution.service.StudentService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,11 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
     @Override
     public List<Course> fetchCoursesForStudent(Long studentId) throws StudentNotFoundException {

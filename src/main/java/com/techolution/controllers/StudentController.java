@@ -1,13 +1,13 @@
 package com.techolution.controllers;
 
 import com.techolution.entities.Course;
-import com.techolution.repositories.StudentRepository;
 import com.techolution.service.StudentService;
 import com.sun.istack.NotNull;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +18,12 @@ import java.util.List;
 
 @RestController
 @Slf4j
+@RequiredArgsConstructor
 @Api(value = "Student", description = "Student controller to handle all student related operations")
 public class StudentController {
 
     @Autowired
-    private StudentRepository studentRepository;
-
-    @Autowired
-    private StudentService studentService;
+    private final StudentService studentService;
 
     @ApiOperation(value = "View a list of all courses for the provided student ID", response = Iterable.class)
     @ApiResponses(value = {

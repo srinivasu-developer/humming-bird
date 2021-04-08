@@ -21,6 +21,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @Api(value = "Student", description = "Instructor controller to handle all instructor related operations")
+@RequestMapping("/instructors")
 public class InstructorController {
 
     @Autowired
@@ -37,7 +38,7 @@ public class InstructorController {
             @ApiResponse(code = 404, message = "The instructor ID you were trying to reach is not found")
     }
     )
-    @GetMapping("/instructors/{instructorId}/students")
+    @GetMapping("/{instructorId}/students")
     List<Student> fetchStudentsForInstructor(@NotNull @PathVariable Long instructorId) {
         return instructorService.findStudentsByInstructor(instructorId);
     }
@@ -49,7 +50,7 @@ public class InstructorController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden")
     }
     )
-    @GetMapping
+    @GetMapping("/")
     List<Instructor> fetchAllInstructors() {
         return instructorRepository.findAll();
     }
@@ -62,7 +63,7 @@ public class InstructorController {
             @ApiResponse(code = 404, message = "The instructor ID you were trying to reach is not found")
     }
     )
-    @GetMapping("/instructors/{instructorId}")
+    @GetMapping("/{instructorId}")
     ResponseEntity<Instructor> fetchInstructorById(@NotNull @PathVariable Long instructorId) {
         return ResponseEntity.ok(instructorService.findInstructorById(instructorId));
     }
@@ -75,7 +76,7 @@ public class InstructorController {
             @ApiResponse(code = 404, message = "The instructor ID you were trying to reach is not found")
     }
     )
-    @DeleteMapping("/instructors/{instructorId}")
+    @DeleteMapping("/{instructorId}")
     ResponseEntity<Void> deleteInstructorById(@NotNull @PathVariable Long instructorId) {
         /* Finds instructor with ID if the instructor is not there, it throws exception */
         instructorService.findInstructorById(instructorId);
@@ -91,7 +92,7 @@ public class InstructorController {
             @ApiResponse(code = 404, message = "The instructor ID you were trying to reach is not found")
     }
     )
-    @PutMapping("/instructors/{instructorId}")
+    @PutMapping("/{instructorId}")
     ResponseEntity<Object> updateInstructor(@NotNull @RequestBody Instructor instructor, @PathVariable long instructorId) {
         /* Finds instructor with ID if the instructor is not there, it throws exception */
         instructorService.findInstructorById(instructorId);
@@ -108,7 +109,7 @@ public class InstructorController {
             @ApiResponse(code = 404, message = "The instructor ID you were trying to reach is not found")
     }
     )
-    @PostMapping("/instructors")
+    @PostMapping("/")
     public ResponseEntity<Object> createUser(@NotNull @RequestBody Instructor instructor) {
         Instructor instructorSaved = instructorRepository.save(instructor);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(instructorSaved.getId()).toUri();
