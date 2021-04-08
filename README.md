@@ -1,7 +1,7 @@
 # humming-bird
 It's an application for learning and teaching marketplace
 
-The application will run on port - 3297
+The application will run on port - 3296
 
 The username - **techolution**
 
